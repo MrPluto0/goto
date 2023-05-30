@@ -7,6 +7,7 @@ package cmd
 import (
 	"fmt"
 	"goto/utils"
+	"goto/utils/log"
 	"os"
 	"os/exec"
 	"runtime"
@@ -34,6 +35,8 @@ var runCmd = &cobra.Command{
 		// Run command
 		var exe *exec.Cmd
 		command := tasks[index].Command
+		log.Info("Start running command: %s", command)
+
 		switch runtime.GOOS {
 		case "linux":
 			exe = exec.Command("/bin/sh", "-c", command)
@@ -44,6 +47,8 @@ var runCmd = &cobra.Command{
 		exe.Stderr = os.Stderr
 		exe.Stdout = os.Stdout
 		err = exe.Run()
+
+		log.Info("Finish running command")
 		return err
 	},
 }

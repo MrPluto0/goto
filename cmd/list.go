@@ -6,8 +6,10 @@ package cmd
 
 import (
 	"fmt"
+	"strings"
 
 	"goto/utils"
+	"goto/utils/log"
 
 	"github.com/spf13/cobra"
 )
@@ -17,10 +19,14 @@ var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "show the list of tasks",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("list called")
 		tasks, err := utils.ReadFile(dbFile)
 		if err == nil {
-			fmt.Println(tasks)
+			for i := 0; i < len(tasks); i++ {
+				task := tasks[i]
+				log.Info("Name: %s\n", task.Name)
+				fmt.Printf("Alias: %s\n", strings.Join(task.Alias, " "))
+				fmt.Printf("Command: %s\n", task.Command)
+			}
 		}
 		return err
 	},

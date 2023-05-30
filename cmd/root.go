@@ -7,8 +7,6 @@ package cmd
 import (
 	"os"
 
-	"goto/utils/log"
-
 	"github.com/spf13/cobra"
 )
 
@@ -40,7 +38,6 @@ func init() {
 
 	dir, _ := os.UserHomeDir()
 	dbFile = dir + "./.goto.db"
-	log.Info(dbFile)
 	// rootCmd.PersistentFlags().StringVar(&dbFile, "db", dir+"/.goto.db", "database file (default is .goto.db)")
 
 	// Cobra also supports local flags, which will only run
